@@ -26,6 +26,6 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-            ${{ inputs.registry_root }}${{ inputs.image_tagged }}/${{ github.ref_name }}:${{ github.sha }}
-            ${{ inputs.registry_root }}${{ inputs.image_tagged }}/${{ github.ref_name }}
+            ghcr.io/${{ github.repository }}/${{ github.ref_name }}:${{ github.sha }}
+            ghcr.io/${{ github.repository }}/${{ github.ref_name }}
 # acdhch/${{ inputs.image_tagged }}

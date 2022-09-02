@@ -1,6 +1,8 @@
 name: build and push
 on:
   push: {}
+  repository_dispatch:
+    types: [run]
 jobs:
   build_and_push_to_registry:
     runs-on: ubuntu-20.04
@@ -27,5 +29,17 @@ jobs:
           push: true
           tags: |
             ghcr.io/${{ github.repository }}/${{ github.ref_name }}:${{ github.sha }}
+            ghcr.io/${{ github.repository }}/${{ github.ref_name }}:latest-18
             ghcr.io/${{ github.repository }}/${{ github.ref_name }}
+      - name: Build and push for stack 20.04
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          build-args:
+            STACK_VERSION: "-20"
+          platforms: linux/amd64
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}/${{ github.ref_name }}:${{ github.sha }}
+            ghcr.io/${{ github.repository }}/${{ github.ref_name }}:latest-20
 # acdhch/${{ inputs.image_tagged }}

@@ -35,8 +35,8 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          build-args:
-            STACK_VERSION: "-20"
+          build-args: |
+            STACK_VERSION=-20
           platforms: linux/amd64
           push: true
           tags: |

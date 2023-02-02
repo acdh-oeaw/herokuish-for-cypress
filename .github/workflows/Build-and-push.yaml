@@ -26,17 +26,17 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      - name: Build and push for stack {{ $env.STACK_VERSION }}
+      - name: Build and push for stack ${{ env.STACK_VERSION }}
         uses: docker/build-push-action@v4
         with:
           context: .
           build-args: |
-            STACK_VERSION=-{{ $env.STACK_VERSION }}
+            STACK_VERSION=-${{ env.STACK_VERSION }}
           platforms: linux/amd64
           push: true
           tags: |
             ghcr.io/${{ github.repository }}/${{ github.ref_name }}:${{ github.sha }}
-            ghcr.io/${{ github.repository }}/${{ github.ref_name }}:latest-{{ $env.STACK_VERSION }}
+            ghcr.io/${{ github.repository }}/${{ github.ref_name }}:latest-${{ env.STACK_VERSION }}
             ghcr.io/${{ github.repository }}/${{ github.ref_name }}
           cache-from: type=gha
           cache-to: type=gha,mode=max

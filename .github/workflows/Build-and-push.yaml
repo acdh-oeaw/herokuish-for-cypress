@@ -3,6 +3,7 @@ on:
   push: {}
   repository_dispatch:
     types: [run]
+  workflow_dispatch: {}
 jobs:
   build_and_push_to_registry:
     runs-on: ubuntu-20.04

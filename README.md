@@ -1,7 +1,7 @@
 A container for gitlab CI/CD test stage with cypress.io dependencies
 ======================================================================
 
-The default herokuish container lacks the X11 and other dependencies the headless electron browser of cypress.io e2e testing needd. This repo contains an add on Dockerfile that adds these dependencies as well as some example config files that are needed to make this work
+The default herokuish container lacks the X11 and other dependencies the headless electron browser of cypress.io e2e testing needs. This repo contains an add on Dockerfile that adds these dependencies as well as some example config files that are needed to make this work
 
 Better e2e tests than none at all!
 
@@ -15,7 +15,7 @@ Best practice: Add version information for node and npm to your package JSON. E.
 ```json
 ,
   "engines": {
-    "node": "12.x",
+    "node": "20.x",
     "npm": "6.14.x"
   }
 ```

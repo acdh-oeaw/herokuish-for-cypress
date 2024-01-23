@@ -1,0 +1,29 @@
+name:
+  daily security update
+
+on:
+  workflow_dispatch: {}
+  repository_dispatch:
+    types: [run]
+  schedule:
+    - cron: "5 6 * * *"
+
+jobs:
+  check_for_updates:
+    runs-on: ubuntu-22.04
+    outputs:
+      check_result: ${{ steps.check_herokuish-for-cypress_container.outputs.check_result }}
+    steps:
+      - name: check herokuish-for-cypress container
+        id: check_herokuish-for-cypress_container
+        run: |
+          docker pull ghcr.io/acdh-oeaw/herokuish-for-cypress/main:latest-22
+          check_result="$(docker run --rm -u 0:0 --entrypoint /bin/sh ghcr.io/acdh-oeaw/herokuish-for-cypress/main:latest-22 \
+            -c 'apt-get update >/dev/null; if [ $(apt list --upgradable 2>/dev/null | wc -l) != 1 ]; then echo -n need to upgrade; else echo -n everything fine ; fi')"
+          echo "$check_result"
+          echo "check_result=$check_result" >> $GITHUB_OUTPUT
+  call_delploy:
+    needs: [check_for_updates]
+    if: needs.check_for_updates.outputs.check_result == 'need to upgrade'
+    uses: ./.github/workflows/Build-and-push.yaml
+    secrets: inherit

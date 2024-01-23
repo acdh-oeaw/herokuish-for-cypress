@@ -19,7 +19,7 @@ jobs:
         run: |
           docker pull ghcr.io/acdh-oeaw/herokuish-for-cypress/main:latest-22
           check_result="$(docker run --rm -u 0:0 --entrypoint /bin/sh ghcr.io/acdh-oeaw/herokuish-for-cypress/main:latest-22 \
-            -c 'apt-get update >/dev/null; if [ $(apt list --upgradable 2>/dev/null | wc -l) != 1 ]; then echo -n need to upgrade; else echo -n everything fine ; fi')"
+            -c 'apt-get update 2>/dev/null >/dev/null; if [ $(apt list --upgradable 2>/dev/null | wc -l) != 1 ]; then echo -n need to upgrade; else echo -n everything fine ; fi')"
           echo "$check_result"
           echo "check_result=$check_result" >> $GITHUB_OUTPUT
   call_delploy:

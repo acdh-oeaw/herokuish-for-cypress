@@ -5,7 +5,8 @@ LABEL "maintainer" "Omar Siam <omar.siam@oeaw.ac.at>"
 
 # Cypress dependencies
 
-ENV DEBIAN_FRONTEND=noninteractive
+ENV DEBIAN_FRONTEND=noninteractive \
+    CYPRESS_CACHE_FOLDER=/tmp/cache/cypress
 RUN \
     --mount=type=cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,sharing=locked \
@@ -22,4 +23,3 @@ RUN \
     pnpm create playwright --quiet --install-deps && \
     cd / && rm -rf /root/.cache/ /root/.local/ /root/playwright && \
     apt-get clean
-ENV CYPRESS_CACHE_FOLDER /tmp/cache/cypress

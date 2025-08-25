@@ -16,7 +16,7 @@ RUN \
     apt-get update && apt-get upgrade -y && \
     apt-get install -y --no-install-recommends libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libnss3 libxss1 libxtst6 xauth xvfb curl && \
     curl -fsSL https://fnm.vercel.app/install | bash -s -- --install-dir /usr/bin -s && \
-    fnm install 20 && \
+    fnm install 22 && \
     export PATH=$PATH:/root/.local/share/fnm/aliases/default/bin/ && \
     corepack enable && \
     cd /root && \

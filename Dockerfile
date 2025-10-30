@@ -23,4 +23,7 @@ RUN \
     mkdir playwright && cd playwright && \
     pnpm create playwright --quiet --install-deps && \
     cd / && rm -rf /root/.cache/ /root/.local/ /root/playwright && \
+    echo 'herokuish procfile exec /bin/bash' > /root/.bash_history && \
+    echo 'tigervncserver -rfbport 5999 -localhost no' > /app/.bash_history && \
+    chown 32767:32767 /app/.bash_history && \
     apt-get clean

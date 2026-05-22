@@ -19,6 +19,7 @@ RUN \
     fnm install 24 && \
     export PATH=$PATH:/root/.local/share/fnm/aliases/default/bin/ && \
     corepack enable && \
+    corepack install -g pnpm@10 && \
     cd /root && \
     mkdir playwright && cd playwright && \
     pnpm create playwright --quiet --install-deps && \
